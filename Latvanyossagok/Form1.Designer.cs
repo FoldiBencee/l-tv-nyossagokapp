@@ -200,7 +200,7 @@
             // 
             // listatorlesbutton
             // 
-            this.listatorlesbutton.Location = new System.Drawing.Point(343, 118);
+            this.listatorlesbutton.Location = new System.Drawing.Point(296, 113);
             this.listatorlesbutton.Name = "listatorlesbutton";
             this.listatorlesbutton.Size = new System.Drawing.Size(75, 23);
             this.listatorlesbutton.TabIndex = 18;
@@ -210,12 +210,13 @@
             // 
             // listamodositbutton
             // 
-            this.listamodositbutton.Location = new System.Drawing.Point(343, 147);
+            this.listamodositbutton.Location = new System.Drawing.Point(377, 113);
             this.listamodositbutton.Name = "listamodositbutton";
             this.listamodositbutton.Size = new System.Drawing.Size(75, 23);
             this.listamodositbutton.TabIndex = 19;
             this.listamodositbutton.Text = "modosit";
             this.listamodositbutton.UseVisualStyleBackColor = true;
+            this.listamodositbutton.Click += new System.EventHandler(this.listamodositbutton_Click);
             // 
             // listBox2
             // 
@@ -229,7 +230,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 326);
+            this.ClientSize = new System.Drawing.Size(458, 326);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listamodositbutton);
             this.Controls.Add(this.listatorlesbutton);

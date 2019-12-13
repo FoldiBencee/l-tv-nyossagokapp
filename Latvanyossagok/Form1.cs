@@ -17,7 +17,7 @@ namespace Latvanyossagok
         public Form1()
         {
             InitializeComponent();
-            conn = new MySqlConnection("Server=localhost;Database=latvanyossagokdb;Uid=root;Pwd=;");
+            conn = new MySqlConnection("Server=localhost3307;Database=latvanyossagokdb;Uid=root;Pwd=;");//3307 suliban kell
             conn.Open();
             var command = conn.CreateCommand();
             command.CommandText = @"CREATE TABLE IF NOT EXISTS `latvanyossagokdb`.`varosok`
@@ -45,7 +45,9 @@ namespace Latvanyossagok
                     var nev = reader.GetString("nev");
                     var lakossag = reader.GetInt32("lakossag");
                     
-                    listBox1.Items.Add(id, nev, lakossag);
+
+                    listBox1.Items.Clear();
+                    listBox1.Items.Add(cmd);//id,nev,lakossag
                 }
             }
 
@@ -58,6 +60,7 @@ namespace Latvanyossagok
 
         private void buttonkuldes_Click(object sender, EventArgs e)
         {
+            varoslistazas();
             try
             {
                 if (!String.IsNullOrWhiteSpace(textBox1.Text))
@@ -122,12 +125,42 @@ namespace Latvanyossagok
 
         private void listatorlesbutton_Click(object sender, EventArgs e)
         {
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT id, nev, lakossag from varosok";
-            if (varosok)
+            if (listBox1.Items.Count > 0)
             {
-
+                MessageBox.Show("nem torolhet olyan varost amihez van latvanyossag rendelve");
             }
+            else
+            {
+                if (listBox1.SelectedIndex ==-1)
+                {
+                    MessageBox.Show("nem jelolt ki semmit");
+                }
+                else
+                {
+                    var cmd = conn.CreateCommand();
+                    cmd.CommandText = "DELETE FROM varosok WHERE @id"; //"SELECT id, nev, lakossag from varosok";
+                    varoslistazas();
+                }
+                
+            }
+            
+            
+
+        }
+
+        private void listamodositbutton_Click(object sender, EventArgs e)
+        {
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "UPDATE FROM varosok set nev= @nev,@lakossag = @lakossag WHERE id = @id;"; //"SELECT id, nev, lakossag from varosok";
+            cmd.Parameters.AddWithValue("@nev", listBox1.Items);
+            cmd.Parameters.AddWithValue("@lakossag", listBox1.Items);
+            cmd.Parameters.AddWithValue("@id", listBox1.Items);
+            cmd.ExecuteNonQuery();
+            varoslistazas();
+        }
+
+        private void buttonlatvanyfel_Click(object sender, EventArgs e)
+        {
 
         }
     }
